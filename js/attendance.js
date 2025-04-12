@@ -40,20 +40,58 @@ window.onload = () => {
   }
 };
 
+document.addEventListener("DOMContentLoaded", () => {
+  const empSelect = document.getElementById("empSelect");
+  const empDetails = document.getElementById("empDetails"); // A div where you show employee info
+
+  if (empSelect) {
+    empSelect.addEventListener("change", function () {
+      const selectedOption = this.options[this.selectedIndex];
+      const name = selectedOption.getAttribute("data-name");
+      const age = selectedOption.getAttribute("data-age");
+      const phone = selectedOption.getAttribute("data-phone");
+      const role = selectedOption.getAttribute("data-role");
+      const address = selectedOption.getAttribute("data-address");
+
+      if (empDetails) {
+        empDetails.innerHTML = `
+          <div class="profile-card">
+            <h3>${name}</h3>
+            <p><strong>Age:</strong> ${age}</p>
+            <p><strong>Phone:</strong> ${phone}</p>
+            <p><strong>Role:</strong> ${role}</p>
+            <p><strong>Address:</strong> ${address}</p>
+          </div>
+        `;
+      }
+    });
+  }
+});
+
+
 // ✅ Load employee options
 function loadEmployees() {
   const employees = JSON.parse(localStorage.getItem("employees")) || [];
   const select = document.getElementById("empSelect");
+
+  if (!select) {
+    console.error("Dropdown element #empSelect not found.");
+    return;
+  }
+
   select.innerHTML = `<option value="">--Select Employee--</option>`;
   employees.forEach(emp => {
     const option = document.createElement("option");
-    option.value = emp.id; // ✅ Fix
+    option.value = emp.id;
     option.setAttribute("data-name", emp.name);
-    option.textContent = `${emp.name} (${emp.id})`; // ✅ Fix
+    option.setAttribute("data-age", emp.age || "");
+    option.setAttribute("data-phone", emp.phone || "");
+    option.setAttribute("data-role", emp.role || "");
+    option.setAttribute("data-address", emp.address || "");
+    option.textContent = `${emp.name} (${emp.id})`;
     select.appendChild(option);
   });
 }
-
 // ✅ Render attendance table
 function renderAttendance() {
   const attendanceTable = document.querySelector("#attendanceTable tbody");
