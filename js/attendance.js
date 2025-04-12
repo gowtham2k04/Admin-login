@@ -47,9 +47,9 @@ function loadEmployees() {
   select.innerHTML = `<option value="">--Select Employee--</option>`;
   employees.forEach(emp => {
     const option = document.createElement("option");
-    option.value = emp.empId;
+    option.value = emp.id; // ✅ Fix
     option.setAttribute("data-name", emp.name);
-    option.textContent = `${emp.name} (${emp.empId})`;
+    option.textContent = `${emp.name} (${emp.id})`; // ✅ Fix
     select.appendChild(option);
   });
 }
