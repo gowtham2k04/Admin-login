@@ -1,7 +1,10 @@
+
 let editIndex = null;
 
 document.getElementById('employeeForm').addEventListener('submit', function(e) {
   e.preventDefault();
+
+  const photoInput = document.getElementById('photo').files[0];
 
   const newEmployee = {
     id: document.getElementById('empId').value,
@@ -14,33 +17,47 @@ document.getElementById('employeeForm').addEventListener('submit', function(e) {
     joiningDate: document.getElementById('joiningDate').value,
     phone: document.getElementById('phone').value,
     address: document.getElementById('address').value,
-    photo: "", // Placeholder
+    photo: "" // We'll fill this using FileReader
   };
-  
-  const photoFile = document.getElementById('photo').files[0];
-const reader = new FileReader();
 
-reader.onloadend = function () {
-  newEmployee.photo = reader.result;
+  const reader = new FileReader();
 
-  let employees = JSON.parse(localStorage.getItem("employees")) || [];
-  employees.push(newEmployee);
-  localStorage.setItem("employees", JSON.stringify(employees));
-  alert("Employee Saved!");
-  document.getElementById('employeeForm').reset();
-  displayEmployees();
-};
+  reader.onloadend = function () {
+    newEmployee.photo = reader.result;
 
-if (photoFile) {
-  reader.readAsDataURL(photoFile); // Converts to base64 string
-}
+    let employees = JSON.parse(localStorage.getItem("employees")) || [];
 
+    if (editIndex !== null) {
+      employees[editIndex] = newEmployee;
+      editIndex = null;
+    } else {
+      employees.push(newEmployee);
+    }
 
-  let employees = JSON.parse(localStorage.getItem("employees")) || [];
-  employees.push(newEmployee);
-  localStorage.setItem("employees", JSON.stringify(employees));
-  alert("Employee Saved!");
-  this.reset();
+    localStorage.setItem("employees", JSON.stringify(employees));
+    alert("Employee Saved!");
+    document.getElementById('employeeForm').reset();
+    displayEmployees();
+  };
+
+  if (photoInput) {
+    reader.readAsDataURL(photoInput); // Read image as base64
+  } else {
+    // If no new photo uploaded
+    if (editIndex !== null) {
+      let employees = JSON.parse(localStorage.getItem("employees")) || [];
+      newEmployee.photo = employees[editIndex].photo;
+
+      employees[editIndex] = newEmployee;
+      localStorage.setItem("employees", JSON.stringify(employees));
+      editIndex = null;
+      alert("Employee Updated!");
+      document.getElementById('employeeForm').reset();
+      displayEmployees();
+    } else {
+      alert("Please select a photo!");
+    }
+  }
 });
 
 function displayEmployees() {
@@ -55,7 +72,7 @@ function displayEmployees() {
       <div class="employee-card">
         <img src="${emp.photo}" alt="Photo" class="emp-photo" width="100" height="100" />
         <div class="emp-details">
-          <strong>${emp.name}</strong> (${emp.empId})<br/>
+          <strong>${emp.name}</strong> (Emp No: ${emp.id})<br/>
           ${emp.role} - ${emp.department}<br/>
           Age: ${emp.age}, Gender: ${emp.gender}<br/>
           📅 Joined: ${emp.joiningDate}<br/>
@@ -76,8 +93,8 @@ function editEmployee(index) {
   const employees = JSON.parse(localStorage.getItem("employees")) || [];
   const emp = employees[index];
 
+  document.getElementById("empId").value = emp.id;
   document.getElementById("name").value = emp.name;
-  document.getElementById("empId").value = emp.empId;
   document.getElementById("age").value = emp.age;
   document.getElementById("email").value = emp.email;
   document.getElementById("gender").value = emp.gender;
@@ -86,7 +103,6 @@ function editEmployee(index) {
   document.getElementById("joiningDate").value = emp.joiningDate;
   document.getElementById("phone").value = emp.phone;
   document.getElementById("address").value = emp.address;
-  document.getElementById("existingPhoto").value = emp.photo;
 
   editIndex = index;
 }
@@ -99,3 +115,4 @@ function deleteEmployee(index) {
 }
 
 window.onload = displayEmployees;
+
