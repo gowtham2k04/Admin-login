@@ -14,8 +14,27 @@ document.getElementById('employeeForm').addEventListener('submit', function(e) {
     joiningDate: document.getElementById('joiningDate').value,
     phone: document.getElementById('phone').value,
     address: document.getElementById('address').value,
-    photo: URL.createObjectURL(document.getElementById('photo').files[0]),
+    photo: "", // Placeholder
   };
+  
+  const photoFile = document.getElementById('photo').files[0];
+const reader = new FileReader();
+
+reader.onloadend = function () {
+  newEmployee.photo = reader.result;
+
+  let employees = JSON.parse(localStorage.getItem("employees")) || [];
+  employees.push(newEmployee);
+  localStorage.setItem("employees", JSON.stringify(employees));
+  alert("Employee Saved!");
+  document.getElementById('employeeForm').reset();
+  displayEmployees();
+};
+
+if (photoFile) {
+  reader.readAsDataURL(photoFile); // Converts to base64 string
+}
+
 
   let employees = JSON.parse(localStorage.getItem("employees")) || [];
   employees.push(newEmployee);
