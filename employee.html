@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employee Details</title>
+  <link rel="stylesheet" href="css/employe.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Employee Details</h1>
+
+    <div class="flex-wrapper">
+      <!-- Left: Form -->
+      <form id="employeeForm">
+        <input type="text" id="name" placeholder="Name" required />
+        <input type="text" id="empId" placeholder="Employee ID" required />
+        <input type="number" id="age" placeholder="Age" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <select id="gender" required>
+          <option value="">Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+        <input type="text" id="department" placeholder="Department" required />
+        <input type="text" id="role" placeholder="Role" required />
+        <input type="date" id="joiningDate" required />
+        <input type="tel" id="phone" placeholder="Phone" required />
+        <textarea id="address" placeholder="Address" required></textarea>
+        <input type="file" id="photo" accept="image/*" onchange="previewPhoto(event)" />
+        <input type="hidden" id="existingPhoto" />
+        <button type="submit">Save Employee</button>
+      </form>
+      
+      <!-- Right: Employee List -->
+      <ul id="employeeList"></ul>
+      
+      <div class="list-section">
+        <div class="button-wrapper">
+          <a href="attendance.html" class="view-btn">📊 View Attendance</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>  
+    function previewPhoto(event) {
+      const image = document.getElementById('previewImage');
+      image.src = URL.createObjectURL(event.target.files[0]);
+      image.style.display = 'block';
+    }
+  </script>
+
+  <script src="js/employee.js"></script>
+</body>
+</html>

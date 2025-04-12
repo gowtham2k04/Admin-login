@@ -1,0 +1,153 @@
+/* General Reset and Updated Background */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #2a2a72, #009ffd); /* New vibrant gradient */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Container for the login box */
+.login-container {
+  background: linear-gradient(135deg, #2a2a72, #009ffd);/* Dark semi-transparent box */
+  padding: 40px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 380px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: fadeInUp 1s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+  animation-delay: 0.5s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Avatar Image Styling */
+.login-image {
+  display: block;
+  margin: 0 auto 25px auto;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #00ff9d, 0 0 25px rgba(0, 255, 157, 0.6);
+  border: 3px solid #00ff9d;
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transitions */
+}
+
+/* Hover Zoom Effect */
+.login-image:hover {
+  transform: scale(1.2); /* Zoom in on hover */
+}
+
+/* Click Fade Out Effect */
+.login-image.clicked {
+  opacity: 0; /* Fade out on click */
+  pointer-events: none; /* Disable further clicks */
+}
+
+/* Optional: Add a transition to smooth the fade effect */
+.login-image {
+  transition: opacity 0.3s ease;
+}
+
+/* Heading */
+.login-container h2 {
+  margin-bottom: 20px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+/* Input Fields with Floating Labels */
+.login-container input {
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0;
+  background: rgba(255, 255, 255, 0.1); /* Darker input box */
+  border: 1px solid #555;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s ease;
+  position: relative;
+}
+
+/* Floating Label Effect */
+.login-container input:focus {
+  border-color: #00ff9d;
+  box-shadow: 0 0 8px #00ff9d;
+}
+
+.login-container input:focus::placeholder {
+  color: transparent;
+}
+
+.login-container input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  transition: 0.3s ease;
+}
+
+/* Button */
+.login-container button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #2a2a72, #009ffd);
+  color: #1e1e2f;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.login-container button:hover {
+  background-color: #00cc80;
+}
+
+/* Error Text */
+.error {
+  color: #ff6b6b;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 20px;
+  }
+
+  .login-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .login-container h2 {
+    font-size: 22px;
+  }
+
+  .login-container input,
+  .login-container button {
+    font-size: 16px;
+  }
+}

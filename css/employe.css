@@ -1,0 +1,217 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #f0f0f0;
+}
+
+/* Container */
+.container {
+  background: rgba(20, 20, 20, 0.9);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 0 30px rgba(0, 255, 157, 0.1);
+  max-width: 1200px;
+  width: 100%;
+  animation: slideFade 1.2s ease-in-out;
+}
+
+/* Title */
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 36px;
+  color: #00ff99;
+  letter-spacing: 1px;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* Layout Flex */
+.flex-wrapper {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+/* Form */
+form#employeeForm {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  min-width: 300px;
+}
+
+form input,
+form select,
+form textarea,
+form button {
+  padding: 12px;
+  border-radius: 10px;
+  background: #1e1e1e;
+  border: 1px solid #00ff99;
+  color: #fff;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  border-color: #00ffaa;
+  outline: none;
+  box-shadow: 0 0 10px #00ffaa66;
+}
+
+form button {
+  background-color: #00ffaa;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #00cc88;
+}
+
+/* Employee List Section */
+.list-section {
+  flex: 1;
+  min-width: 300px;
+  text-align: center;
+}
+
+.list-section h2 {
+  color: #00ffaa;
+  font-size: 24px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #00ffaa;
+  padding-bottom: 8px;
+}
+
+#employeeList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Employee Card */
+.employee-card {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  background-color: #1a1a1a;
+  border-left: 5px solid #00ffaa;
+  border-radius: 10px;
+  padding: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.employee-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(0, 255, 170, 0.4);
+}
+
+.emp-photo {
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.emp-details {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.emp-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.emp-actions button {
+  padding: 6px 10px;
+  background-color: #00ffaa;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.emp-actions button:hover {
+  background-color: #00cc88;
+}
+
+/* View Button */
+.view-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 20px;
+  background-color: #00ffaa;
+  color: #000;
+  border-radius: 10px;
+  text-decoration: none;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.view-btn:hover {
+  transform: scale(1.05);
+  background-color: #00cc88;
+}
+
+/* Animations */
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #00ffaa, 0 0 20px #00ffaa;
+  }
+  to {
+    text-shadow: 0 0 20px #00ffaa, 0 0 30px #00ffaa;
+  }
+}
+
+@keyframes slideFade {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .flex-wrapper {
+    flex-direction: column;
+  }
+
+  .emp-photo {
+    width: 80px;
+    height: 80px;
+  }
+
+  form#employeeForm,
+  .list-section {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+}

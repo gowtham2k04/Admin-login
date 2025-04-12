@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Employee Attendance</title>
+  <link rel="stylesheet" href="css/attendance.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container animated fadeInUp">
+    <h1>Mark Attendance</h1>
+    <form id="attendanceForm" class="form-card">
+      <select id="empSelect" required>
+        <option value="">--Select Employee--</option>
+      </select>
+      <select id="status" required>
+        <option value="Present">Present</option>
+        <option value="Absent">Absent</option>
+      </select>
+      <button type="submit" class="btn">Submit</button>
+    </form>
+
+    
+
+    <h2>Attendance Records</h2>
+    <table id="attendanceTable">
+      <thead>
+        <tr>
+          <th>Employee</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <button id="clearAttendanceBtn" class="btn clear-btn">🧹 Clear All Attendance</button>
+    <button onclick="exportToPDF()" class="btn export-btn">📁 Export to PDF</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="js/attendance.js"></script>
+</body>
+</html>

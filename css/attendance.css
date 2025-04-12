@@ -1,0 +1,139 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #121212;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+  }
+  
+  .container {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px 20px;
+    animation: fadeIn 1s ease;
+  }
+  
+  h1, h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #00e5ff;
+    animation: fadeInUp 1s ease-in-out;
+  }
+  
+  .form-card, .employee-profile-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    animation: fadeInUp 0.8s ease;
+  }
+  
+  select, input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    margin: 10px 0;
+    border-radius: 8px;
+    font-size: 16px;
+    background: #1e1e1e;
+    color: #eee;
+  }
+  
+  input::placeholder {
+    color: #999;
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background-color: #00e5ff;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
+  }
+  
+  .clear-btn {
+    background: crimson;
+    color: white;
+  }
+  
+  .clear-btn:hover {
+    background: #c2185b;
+  }
+  
+  .export-btn {
+    background-color: #00c853;
+  }
+  
+  .export-btn:hover {
+    background-color: #00e676;
+  }
+  
+  /* Table Styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #333;
+    color: #ddd;
+  }
+  
+  th {
+    background-color: #333;
+  }
+  
+  .search-section {
+    margin-top: 30px;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    h1, h2 {
+      font-size: 22px;
+    }
+  
+    .btn {
+      padding: 14px;
+    }
+  
+    table {
+      font-size: 14px;
+    }
+  }
+  
