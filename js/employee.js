@@ -1,4 +1,3 @@
-
 let editIndex = null;
 
 document.getElementById('employeeForm').addEventListener('submit', function(e) {
@@ -17,13 +16,12 @@ document.getElementById('employeeForm').addEventListener('submit', function(e) {
     joiningDate: document.getElementById('joiningDate').value,
     phone: document.getElementById('phone').value,
     address: document.getElementById('address').value,
-    photo: "" // We'll fill this using FileReader
+    photo: ""
   };
 
-  const reader = new FileReader();
-
-  reader.onloadend = function () {
-    newEmployee.photo = reader.result;
+  // Function to save employee
+  function saveEmployeeWithPhoto(photoBase64) {
+    newEmployee.photo = photoBase64;
 
     let employees = JSON.parse(localStorage.getItem("employees")) || [];
 
@@ -35,27 +33,26 @@ document.getElementById('employeeForm').addEventListener('submit', function(e) {
     }
 
     localStorage.setItem("employees", JSON.stringify(employees));
-    alert("Employee Saved!");
+    alert("Employee saved successfully!");
     document.getElementById('employeeForm').reset();
     displayEmployees();
-  };
+  }
 
   if (photoInput) {
-    reader.readAsDataURL(photoInput); // Read image as base64
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      saveEmployeeWithPhoto(reader.result);
+    };
+    reader.readAsDataURL(photoInput);
   } else {
-    // If no new photo uploaded
-    if (editIndex !== null) {
-      let employees = JSON.parse(localStorage.getItem("employees")) || [];
-      newEmployee.photo = employees[editIndex].photo;
+    // No new photo uploaded
+    let employees = JSON.parse(localStorage.getItem("employees")) || [];
 
-      employees[editIndex] = newEmployee;
-      localStorage.setItem("employees", JSON.stringify(employees));
-      editIndex = null;
-      alert("Employee Updated!");
-      document.getElementById('employeeForm').reset();
-      displayEmployees();
+    if (editIndex !== null) {
+      newEmployee.photo = employees[editIndex].photo;
+      saveEmployeeWithPhoto(newEmployee.photo);
     } else {
-      alert("Please select a photo!");
+      alert("Please upload a photo!");
     }
   }
 });
@@ -70,12 +67,12 @@ function displayEmployees() {
     const li = document.createElement("li");
     li.innerHTML = `
       <div class="employee-card">
-        <img src="${emp.photo}" alt="Photo" class="emp-photo" width="100" height="100" />
+        <img src="${emp.photo}" alt="Employee Photo" width="100" height="100" />
         <div class="emp-details">
           <strong>${emp.name}</strong> (Emp No: ${emp.id})<br/>
           ${emp.role} - ${emp.department}<br/>
-          Age: ${emp.age}, Gender: ${emp.gender}<br/>
-          📅 Joined: ${emp.joiningDate}<br/>
+          Age: ${emp.age} | Gender: ${emp.gender}<br/>
+          Joined: ${emp.joiningDate}<br/>
           📞 ${emp.phone} | ✉️ ${emp.email}<br/>
           📍 ${emp.address}
         </div>
@@ -115,4 +112,3 @@ function deleteEmployee(index) {
 }
 
 window.onload = displayEmployees;
-
